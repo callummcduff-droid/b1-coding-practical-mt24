@@ -75,7 +75,9 @@ class Mission:
 
     @classmethod
     def from_csv(cls, file_name: str):
-        #import file_name
+        import file_name
+        
+
         pass
 
 
