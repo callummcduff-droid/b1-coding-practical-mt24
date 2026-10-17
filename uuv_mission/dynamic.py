@@ -75,9 +75,15 @@ class Mission:
 
     @classmethod
     def from_csv(cls, file_name: str):
-        open(file_name,"r")
+        with open(file_name, "r") as f:
         [var1, var2, var3] = file_name.split(",")
-
+        var1 = var1.pop(0)
+        var2 = var2.pop(0)
+        var3 = var3.pop(0)
+        reference = float(var1)
+        cave_height = float(var2)
+        cave_depth = float(var3)
+        return cls(reference, cave_height, cave_depth)
     pass 
 
 
