@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import numpy as np
 import matplotlib.pyplot as plt
 from .terrain import generate_reference_and_limits
+from .control import control
 
 class Submarine:
     def __init__(self):
@@ -107,7 +108,8 @@ class ClosedLoop:
         for t in range(T):
             positions[t] = self.plant.get_position()
             observation_t = self.plant.get_depth()
-            # Call your controller here 
+            # Call your controller here
+            actions[t] = self.controller(t, positions, mission.reference)
             self.plant.transition(actions[t], disturbances[t])
 
         return Trajectory(positions)
@@ -115,3 +117,5 @@ class ClosedLoop:
     def simulate_with_random_disturbances(self, mission: Mission, variance: float = 0.5) -> Trajectory:
         disturbances = np.random.normal(0, variance, len(mission.reference))
         return self.simulate(mission, disturbances)
+
+
