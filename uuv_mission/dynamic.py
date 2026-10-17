@@ -76,8 +76,8 @@ class Mission:
     @classmethod
     def from_csv(cls, file_name: str):
         open(file_name,"r")
-        var1 = file_name.split(",")
-        
+        [var1, var2, var3] = file_name.split(",")
+
     pass 
 
 
