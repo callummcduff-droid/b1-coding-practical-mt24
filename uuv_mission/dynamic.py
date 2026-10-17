@@ -75,9 +75,9 @@ class Mission:
 
     @classmethod
     def from_csv(cls, file_name: str):
-        open(file_name)
-        return cls(np.array([]), np.array([]), np.array([]))  # Placeholder for actual implementation
-        pass
+        open(file_name,"r")
+       
+    pass 
 
 
 class ClosedLoop:
