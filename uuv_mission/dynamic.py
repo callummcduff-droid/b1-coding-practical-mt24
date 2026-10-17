@@ -76,14 +76,16 @@ class Mission:
     @classmethod
     def from_csv(cls, file_name: str):
         with open(file_name, "r") as f:
-        [var1, var2, var3] = file_name.split(",")
-        var1 = var1.pop(0)
-        var2 = var2.pop(0)
-        var3 = var3.pop(0)
-        reference = float(var1)
-        cave_height = float(var2)
-        cave_depth = float(var3)
-        return cls(reference, cave_height, cave_depth)
+            index = len(f.readlines())
+            for a in range(1, index + 1):
+                var1 = f.readlines()
+                split_var1 = var1[a].split(",")
+                float(split_var1)
+                reference[a-1] = split_var1[0]
+                cave_height[a-1] = split_var1[1]
+                cave_depth[a-1] = split_var1[2]
+            return cls(reference, cave_height, cave_depth)
+    
     pass 
 
 
