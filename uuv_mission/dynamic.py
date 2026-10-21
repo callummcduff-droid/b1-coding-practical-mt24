@@ -79,13 +79,16 @@ class Mission:
         with open(file_name, "r") as f:
             lines = f.readlines()
 
+        # Declaring variables within function scope then returning
         reference = []
         cave_height = []
         cave_depth = []
-            
+
+        # Iterating through each line from the second onwards    
         for line in lines[1:]:
             split_var = line.strip().split(",")
 
+            # Appending relevant component of line to array
             reference.append(float(split_var[0]))
             cave_height.append(float(split_var[1]))
             cave_depth.append(float(split_var[2]))
@@ -116,7 +119,8 @@ class ClosedLoop:
             positions[t] = self.plant.get_position()
             observation_t = self.plant.get_depth()
             # Call your controller here
-            actions[t] = self.controller(t, positions, mission.reference)
+            # Producing controller action
+            actions[t] = self.controller(t, positions, mission.reference, 0.15, 0.6)
             self.plant.transition(actions[t], disturbances[t])
 
         return Trajectory(positions)
