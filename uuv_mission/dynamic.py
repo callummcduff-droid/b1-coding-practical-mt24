@@ -77,15 +77,22 @@ class Mission:
     @classmethod
     def from_csv(cls, file_name: str):
         with open(file_name, "r") as f:
-            index = len(f.readlines())
-            for a in range(1, index + 1):
-                var1 = f.readlines()
-                split_var1 = var1[a].split(",")
-                float(split_var1)
-                reference[a-1] = split_var1[0]
-                cave_height[a-1] = split_var1[1]
-                cave_depth[a-1] = split_var1[2]
-            return cls(reference, cave_height, cave_depth)
+            lines = f.readlines()
+
+        reference = []
+        cave_height = []
+        cave_depth = []
+            
+        for line in lines[1:]:
+            split_var = line.strip().split(",")
+
+            reference.append(float(split_var[0]))
+            cave_height.append(float(split_var[1]))
+            cave_depth.append(float(split_var[2]))
+        return cls(
+            np.array(reference), 
+            np.array(cave_height), 
+            np.array(cave_depth))
     
     pass 
 
